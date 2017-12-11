@@ -19,14 +19,14 @@ $app->get('/', function() use($app) {
 $app->post('/', function() use($app) {
 	$data = json_decode(file_get_contents("php://input"));
 
-	if (!$data) {
-		return 'ax';}
-	if ($data->secret !== getenv('VK_SECRET_TOKEN') && $data->type !== 'confirmation') {
-		return 'ax'}
+	if (!$data)
+		return 'ax';
+	if ($data->secret !== getenv('VK_SECRET_TOKEN') && $data->type !== 'confirmation')
+		return 'ax';
 
 	switch ($data->type) {
 		case 'confirmation':
-			return getenv('VK_CONFIRM_CODE')
+			return getenv('VK_CONFIRM_CODE');
 			break;
 		
 		case 'message_new':
