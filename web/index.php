@@ -1,6 +1,8 @@
 <?php
 
 require('../vendor/autoload.php');
+require('functions.php');
+
 
 $app = new Silex\Application();
 $app['debug'] = true;
@@ -9,7 +11,6 @@ $app['debug'] = true;
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
 ));
-
 
 
 $app->get('/', function() use($app) {
@@ -30,16 +31,12 @@ $app->post('/', function() use($app) {
 			break;
 		
 		case 'message_new':
-			
-			$request_params = array(
-				'user_id' => $data->object->user_id,
-				'message' => 'Добрый день, уважаемый!<br>Я тот, кто взломает вашу страницу, если вы не заплатите 1/2 шекеля Израиля в фонд помощи аутистам!!!',
-				'access_token' => getenv('VK_TOKEN'),
-				'v' => '5.69' 
-
-			);
-			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
-			return 'ok';
+			if ($data->object->body == '<admin>') {
+				$body = 'Да я смотрю, ты админ... Чего прикажете, ваше благородие?';
+			}else{
+				$body = 'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи';
+			}
+			message_to($data->object->user_id, $body);
 
 			break;
 	}
