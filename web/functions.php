@@ -1,6 +1,6 @@
 <?php
 function message_to($someones_id, $text='Привет!Я ДзБОТ-1.<br>Что тебе нужно?')
-
+{
 	$request_params = array(
 				'user_id' => $someones_id,
 				'message' => $text,
