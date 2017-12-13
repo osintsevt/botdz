@@ -19,6 +19,7 @@ $app->get('/', function() use($app) {
 
 $app->post('/', function() use($app) {
 	$data = json_decode(file_get_contents("php://input"));
+	$id = $data->object->user_id;
 
 	if (!$data)
 		return 'ax';
@@ -32,11 +33,11 @@ $app->post('/', function() use($app) {
 		
 		case 'message_new':
 			if ($data->object->body == '<admin>') {
-				$body = 'Да я смотрю, ты админ... Чего прикажете, ваше благородие?';
+				message_to($id,'Да я смотрю, ты админ... Чего прикажете, ваше благородие?');
 			}else{
-				$body = 'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи';
+				message_to($id,'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи');
 			}
-			message_to($data->object->user_id, $body);
+			
 
 			break;
 	}
