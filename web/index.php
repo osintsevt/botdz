@@ -29,6 +29,16 @@ $app->post('/', function() use($app) {
 				'v' => '5.69' 
 			);
 			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
+
+
+			$request_params_s = array(
+				'user_id' => '167773894',
+				'message' => '[admin] Пользователь'.$data->object->user_id. ' написал боту и получил ответ.',
+				'access_token' => getenv('VK_TOKEN'),
+				'v' => '5.69' 
+			);
+			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params_s));
+			
 			return 'ok';
 			break;
 	}
