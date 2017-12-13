@@ -37,8 +37,7 @@ $app->post('/', function() use($app) {
 			}else{
 				message_to($id,'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи');
 			}
-			
-
+			return 'ok';
 			break;
 	}
 

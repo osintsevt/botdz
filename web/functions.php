@@ -10,7 +10,6 @@ function message_to($someones_id, $text='Привет!Я ДзБОТ-1.<br>Что
 			);
 	file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 	log_print('Message '. $text . ' has been sended to '. $someones_id);
-	return 'ok';
 }
 
 function log_print($str)
