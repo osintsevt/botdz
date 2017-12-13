@@ -34,8 +34,12 @@ $app->post('/', function() use($app) {
 		case 'message_new':
 			if ($data->object->body == '<admin>') {
 				message_to($id,'Да я смотрю, ты админ... Чего прикажете, ваше благородие?');
+				return 'ok';
+				break;
 			}else{
 				message_to($id,'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи');
+				return 'ok';
+				break;
 			}
 			return 'ok';
 			break;
