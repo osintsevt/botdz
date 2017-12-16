@@ -2,7 +2,6 @@
 require('../vendor/autoload.php');
 $app = new Silex\Application();
 $app['debug'] = true;
-$dz = 'ДЗ пока не написали';
 
 // Register the monolog logging service
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -23,12 +22,15 @@ $app->post('/', function() use($app) {
 			break;
 		
 		case 'message_new':
-			if (strpos($data->object->body,'admin:')!==false) 
-				$GLOBALS['dz'] = preg_replace('/admin:/', '', $data->object->body);
+			if (strpos($data->object->body,'admin:')!==false) {
+				$x = preg_replace('/admin:/', '', $data->object->body);
+				putenv ("DZ=$x");
+			}
+
 
 			$request_params = array(
 				'user_id' => $data->object->user_id,
-				'message' => $GLOBALS['dz'],
+				'message' => getenv('DZ'),
 				'access_token' => getenv('VK_TOKEN'),
 				'v' => '5.69' 
 			);
