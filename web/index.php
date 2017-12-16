@@ -20,7 +20,7 @@ $app->get('/', function() use($app) {
 $app->post('/', function() use($app) {
 	$data = json_decode(file_get_contents("php://input"));
 	$id = $data->object->user_id;
-	$text = 'Some text'
+	$text = 'ДЗ пока что нет';
 
 	if (!$data)
 		return 'ax';
@@ -33,28 +33,17 @@ $app->post('/', function() use($app) {
 			break;
 		
 		case 'message_new':
-			/*if ($data->object->body == '<admin>') {
-				message_to($id,'Да я смотрю, ты админ... Чего прикажете, ваше благородие?');
-				return 'ok';
-				break;
-			}else{
-				message_to($id,'Предет!Я вшо еще малышь, но я вижю, што ты мне пишешь)))Хи-хи-хи');
-				return 'ok';
-				break;
+			if (preg_match('<admin>',$data->object->body)) {
+				$text = preg_replace('<admin>', '', $data->object->body);
 			}
-			message_to($id, 'Тест');*/
-
 			$request_params = array(
 			'user_id' => $data->object->user_id,
 			'message' => 'Test',
  			'access_token' => getenv('VK_TOKEN'),
- 			'v' => '5.69' 
-
-		);
- 		file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
- 		return 'ok';
-
-
+ 			'v' => '5.69'
+			);
+ 			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
+ 			return 'ok';
   return 'ax';
 });
 
