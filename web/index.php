@@ -23,14 +23,16 @@ $app->post('/', function() use($app) {
 		
 		case 'message_new':
 			if (strpos($data->object->body,'admin:')!==false) {
+				$file = fopen("dz.txt", 'w');
 				$x = preg_replace('/admin:/', '', $data->object->body);
-				putenv ("DZ=$x");
+				fwrite($file, $x);
+				fclose($file);
 			}
 
 
 			$request_params = array(
 				'user_id' => $data->object->user_id,
-				'message' => getenv('DZ'),
+				'message' => file_get_contents('dz.txt'),
 				'access_token' => getenv('VK_TOKEN'),
 				'v' => '5.69' 
 			);
