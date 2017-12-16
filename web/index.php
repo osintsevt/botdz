@@ -28,7 +28,7 @@ $app->post('/', function() use($app) {
 
 			$request_params = array(
 				'user_id' => $data->object->user_id,
-				'message' => $dz,
+				'message' => $GLOBALS['dz'];,
 				'access_token' => getenv('VK_TOKEN'),
 				'v' => '5.69' 
 			);
