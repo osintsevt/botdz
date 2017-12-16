@@ -14,7 +14,7 @@ $app->get('/', function() use($app) {
 });
 $app->post('/', function() use($app) {
 	$data = json_decode(file_get_contents("php://input"));
-	$dz_s = preg_replace('/admin:/', '//', $data->object->body);
+	$dz_s = preg_replace('/admin:/', '', $data->object->body);
 	if (!$data)
 		return 'ax';
 	if ($data->secret !== getenv('VK_SECRET_TOKEN') && $data->type !== 'confirmation')
@@ -25,7 +25,7 @@ $app->post('/', function() use($app) {
 			break;
 		
 		case 'message_new':
-			if (strpos('admin:',$data->object->body) !== false) 
+			if (strpos($data->object->body,'admin:')) 
 				putenv("DZ=$dz_s");
 
 			$request_params = array(
