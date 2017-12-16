@@ -2,7 +2,7 @@
 require('../vendor/autoload.php');
 $app = new Silex\Application();
 $app['debug'] = true;
-$dz = 'ДЗ пока не написали';
+//$dz = 'ДЗ пока не написали';
 // Register the monolog logging service
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
@@ -11,7 +11,6 @@ $app->get('/', function() use($app) {
   return 'Hello World!';
 });
 $app->post('/', function() use($app) {
-	global $dz;
 	$data = json_decode(file_get_contents("php://input"));
 	if (!$data)
 		return 'ax';
