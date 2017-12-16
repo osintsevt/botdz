@@ -25,13 +25,12 @@ $app->post('/', function() use($app) {
 			break;
 		
 		case 'message_new':
-			if (preg_match('admin:',$data->object->body) != 0) 
-				//putenv("DZ=$dz_s");
-				$dz = 'TEst';
+			if (strpos('admin:',$data->object->body) !== false) 
+				putenv("DZ=$dz_s");
 
 			$request_params = array(
 				'user_id' => $data->object->user_id,
-				'message' => $dz,
+				'message' => getenv('DZ'),
 				'access_token' => getenv('VK_TOKEN'),
 				'v' => '5.69' 
 			);
