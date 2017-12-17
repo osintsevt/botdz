@@ -3,6 +3,17 @@ require('../vendor/autoload.php');
 $app = new Silex\Application();
 $app['debug'] = true;
 
+function message_to($someones_id, $text)
+{
+	$request_params = array(
+				'user_id' => $someones_id,
+				'message' => $text,
+				'access_token' => getenv('VK_TOKEN'),
+				'v' => '5.69'
+				);
+	file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
+}
+
 // Register the monolog logging service
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
   'monolog.logfile' => 'php://stderr',
@@ -29,24 +40,9 @@ $app->post('/', function() use($app) {
 				fclose($file);
 			}
 
-
-			$request_params = array(
-				'user_id' => $data->object->user_id,
-				'message' => file_get_contents('dz.txt'),
-				'access_token' => getenv('VK_TOKEN'),
-				'v' => '5.69' 
-			);
-			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
-
-
-			$request_params_s = array(
-				'user_id' => '167773894',
-				'message' => '[admin] Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ.',
-				'access_token' => getenv('VK_TOKEN'),
-				'v' => '5.69' 
-			);
-			file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params_s));
-
+			message_to($data->object->user_id, file_get_contents('dz.txt'));
+	
+			message_to($data->object->user_id, 'admin: Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ');
 			sleep(0.02);
 			return 'ok';
 			break;
