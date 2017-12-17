@@ -50,17 +50,17 @@ $app->post('/', function() use($app) {
 			}
 
 			if (preg_match('/Привет|Шалом|Хай|Хеллоу|Здарова|Здравствуй|Добрый день|Добрый вечер/i', $data->object->body)&&(!$a)) {
-				message_to($data->object->user_id, 'Привет, друг. Что нужно?';
+				message_to($data->object->user_id, 'Привет, друг. Что нужно?');
 				$a = true;
 			}
 
 			if (preg_match('/Вониш/i', $data->object->body)&&(!$a)) {
-				message_to($data->object->user_id, 'Пес';
+				message_to($data->object->user_id, 'Пес');
 				$a = true;
 			}
 			
 			if (preg_match('/Спасибо/i', $data->object->body)&&(!$a)) {
-				message_to($data->object->user_id, 'Пожалуйста';
+				message_to($data->object->user_id, 'Пожалуйста');
 				$a = true;
 			}
 	
