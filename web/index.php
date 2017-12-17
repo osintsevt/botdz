@@ -44,27 +44,30 @@ $app->post('/', function() use($app) {
 				$a = true;
 			}
 
-			if (preg_match('/дз/i', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, file_get_contents('dz.txt'));
 				$a = true;
 			}
 
-			if (preg_match('/Привет|Шалом|Хай|Хеллоу|Здарова|Здравствуй|Добрый день|Добрый вечер/i', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Пп]ривет|[Шш]алом|Х[ae]й|[хХ]еллоу|[Зз]дарова|[Зз]дравствуй|[Дд]обрый день|[Дд]обрый вечер/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, 'Привет, друг. Что нужно?');
 				$a = true;
 			}
 
-			if (preg_match('/Вониш/i', $data->object->body)&&(!$a)) {
+			if (preg_match('/[вВ]ониш/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, 'Пес');
 				$a = true;
 			}
 			
-			if (preg_match('/Спасибо/i', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Сс]пасибо/i', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, 'Пожалуйста');
 				$a = true;
 			}
 	
-			message_to($data->object->user_id, 'admin: Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ');
+			if (!$a) {
+				message_to($data->object->user_id, 'К такому меня жизнь не готовила');
+			}
+			//message_to($data->object->user_id, 'admin: Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ');
 			sleep(0.02);
 			return 'ok';
 			break;
