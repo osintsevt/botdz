@@ -41,7 +41,7 @@ $app->post('/', function() use($app) {
 				$x = preg_replace('/admin:/', '', $data->object->body);
 				fwrite($file, $x);
 				fclose($file);
-				message_to($data->object->user_id, 'ДЗ обновлено';
+				message_to($data->object->user_id, 'ДЗ обновлено');
 				$a = true;
 			}
 
