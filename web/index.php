@@ -41,10 +41,11 @@ $app->post('/', function() use($app) {
 				$x = preg_replace('/admin:/', '', $data->object->body);
 				fwrite($file, $x);
 				fclose($file);
+				message_to($data->object->user_id, 'ДЗ обновлено';
 				$a = true;
 			}
 
-			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
+			if (preg_match('/([Дд])([Зз])/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, file_get_contents('dz.txt'));
 				$a = true;
 			}
