@@ -54,9 +54,14 @@ $app->post('/', function() use($app) {
 					'access_token' => getenv('VK_TOKEN'),
 					'v' => '5.69'
 					);
-					$response = json_decode(file_get_contents('https://api.vk.com/method/groups.getMembers?' . http_build_query($request_params)));
+					$response = json_decode(file_get_contents('https://api.vk.com/method/groups.getMembers?' . http_build_query($request_params)), true);
 
-					message_to($data->object->user_id, $response);
+					for ($i=0; $i <len($response) ; $i++) { 
+						message_to($data->object->user_id, $response[items][i]);
+					}
+
+					
+					$a = true;
 
 				}
 				
