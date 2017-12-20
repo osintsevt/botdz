@@ -36,21 +36,21 @@ $app->post('/', function() use($app) {
 
 		$a = false;
 
-			if (strpos($data->object->body,'admin:')!==false) {
+			if (strpos($data->object->body,'admin@dz.bot $~')!==false) {
 				$file = fopen("dz.txt", 'w');
-				$x = preg_replace('/admin:/', '', $data->object->body);
+				$x = preg_replace('/admin@dz.bot $~/', '', $data->object->body);
 				fwrite($file, $x);
 				fclose($file);
 				message_to($data->object->user_id, 'ДЗ обновлено');
 				$a = true;
 			}
 
-			if (preg_match('/([Дд])([Зз])/', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, file_get_contents('dz.txt'));
 				$a = true;
 			}
 
-			if (preg_match('/[Пп]ривет|[Шш]алом|Х[ae]й|[хХ]еллоу|[Зз]дарова|[Зз]дравствуй|[Дд]обрый день|[Дд]обрый вечер/', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Пп]ривет|[Шш]алом|[Хх]aй|[Хх]ей|[хХ]еллоу|[Зз]дарова|[Зз]дравствуй|[Дд]обрый день|[Дд]обрый вечер/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, 'Привет, друг. Что нужно?');
 				$a = true;
 			}
@@ -60,7 +60,7 @@ $app->post('/', function() use($app) {
 				$a = true;
 			}
 			
-			if (preg_match('/[Сс]пасибо/i', $data->object->body)&&(!$a)) {
+			if (preg_match('/[Сс]пасибо/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, 'Пожалуйста');
 				$a = true;
 			}
