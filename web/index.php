@@ -36,9 +36,9 @@ $app->post('/', function() use($app) {
 
 		$a = false;
 
-			if (strpos($data->object->body,'admin@dz.bot $~')!==false) {
+			if (strpos($data->object->body,'admin@dz.bot ~')!==false) {
 				$file = fopen("dz.txt", 'w');
-				$x = preg_replace('/admin@dz.bot $~/', '', $data->object->body);
+				$x = preg_replace('/admin@dz.bot ~/', '', $data->object->body);
 				fwrite($file, $x);
 				fclose($file);
 				message_to($data->object->user_id, 'ДЗ обновлено');
