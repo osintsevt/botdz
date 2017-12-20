@@ -36,13 +36,30 @@ $app->post('/', function() use($app) {
 
 		$a = false;
 
-			if (strpos($data->object->body,'admin@dz.bot ~')!==false) {
-				$file = fopen("dz.txt", 'w');
-				$x = preg_replace('/admin@dz.bot ~/', '', $data->object->body);
-				fwrite($file, $x);
-				fclose($file);
-				message_to($data->object->user_id, 'ДЗ обновлено');
-				$a = true;
+			if (strpos($data->object->body,'admin@dz.bot')!==false) {
+				if (strpos($data->object->body, '-dz') !==false) {
+					$file = fopen("dz.txt", 'w');
+					$x = preg_replace('/admin@dz.bot/', '', $data->object->body);
+					$x = preg_replace('/-dz/', '', $x);
+					fwrite($file, $x);
+					fclose($file);
+					message_to($data->object->user_id, 'ДЗ обновлено');
+					$a = true;
+				}
+
+				if (strpos($data->object->body, '-m')) {
+					
+					$request_params = array(
+					'group_id' => 'dzpredmet',
+					'access_token' => getenv('VK_TOKEN'),
+					'v' => '5.69'
+					);
+					$response = json_decode(file_get_contents('https://api.vk.com/method/groups.getMembers?' . http_build_query($request_params)));
+
+					message_to($data->object->user_id, $response);
+
+				}
+				
 			}
 
 			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
