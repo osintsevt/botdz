@@ -57,7 +57,7 @@ $app->post('/', function() use($app) {
 					$response = json_decode(file_get_contents('https://api.vk.com/method/groups.getMembers?' . http_build_query($request_params)), true);
 
 					for ($i=0; $i < count($response); $i++) { 
-						message_to($data->object->user_id, $response[items][i]);
+						message_to($data->object->user_id, $response['items'][$i]);
 					}
 
 					
