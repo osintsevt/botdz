@@ -47,7 +47,7 @@ $app->post('/', function() use($app) {
 					$a = true;
 				}
 
-				if (strpos($data->object->body, '-m')) {
+				/*if (strpos($data->object->body, '-m')) {
 					
 					$request_params = array(
 					'group_id' => 'dzpredmet',
@@ -64,7 +64,7 @@ $app->post('/', function() use($app) {
 					$a = true;
 
 				}
-				
+			*/	
 			}
 
 			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
