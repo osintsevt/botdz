@@ -61,8 +61,6 @@ $app->post('/', function() use($app) {
 			if (!$a) {
 				message_to($data->object->user_id, 'К такому меня жизнь не готовила');
 			}
-			//message_to($data->object->user_id, 'admin: Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ');
-			sleep(0.02);
 			return 'ok';
 			break;
 	}
