@@ -36,8 +36,8 @@ $app->post('/', function() use($app) {
 
 		$a = false;
 
-			if (strpos($data->object->body,'admin@dz.bot')!==false) {
-				if (strpos($data->object->body, '-dz') !==false) {
+			//if (strpos($data->object->body,'admin@dz.bot')!==false) {
+				if (strpos($data->object->body, 'admin@dz.bot -dz') !==false) {
 					$file = fopen("dz.txt", 'w');
 					$x = preg_replace('/admin@dz.bot/', '', $data->object->body);
 					$x = preg_replace('/-dz/', '', $x);
@@ -63,9 +63,9 @@ $app->post('/', function() use($app) {
 					
 					$a = true;
 
-				}
-			*/	
-			}
+				}*/
+				
+			//}
 
 			if (preg_match('/[Дд][Зз]/', $data->object->body)&&(!$a)) {
 				message_to($data->object->user_id, file_get_contents('dz.txt'));
@@ -91,7 +91,6 @@ $app->post('/', function() use($app) {
 				message_to($data->object->user_id, 'К такому меня жизнь не готовила');
 			}
 			//message_to($data->object->user_id, 'admin: Пользователь( https://vk.com/id'.$data->object->user_id. ' ) написал боту и получил ответ');
-			sleep(0.02);
 			return 'ok';
 			break;
 	}
