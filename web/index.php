@@ -52,7 +52,7 @@ $app->post('/', function() use($app) {
 
 			}
 
-			if ((strpos($data->object->body,'admin:')!==false&&)(!$a)) {
+			if ((strpos($data->object->body,'admin:')!==false)&&(!$a)) {
 				$file = fopen("dz.txt", 'w');
 				$x = preg_replace('/admin:/', '', $data->object->body);
 				fwrite($file, $x);
