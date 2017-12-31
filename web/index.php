@@ -32,6 +32,34 @@ $app->post('/', function() use($app) {
 		
 		case 'message_new':
 		$a = false;
+			if (strpos($data->object->body,'Новый год пришел!')!==false) {
+
+				$params = array(
+				'group_id' => 'dzpredmet', 
+				'access_token' => getenv('VK_TOKEN'),
+				'v' => '5.69'
+				);
+
+				$ids = json_decode(file_get_contents('https://api.vk.com/method/groups.getMembers?'.http_build_query($params)), true)['response']['items'];
+
+				for ($i=0; $i < count($ids); $i++) { 
+					message_to($ids[$i], '|i¹i|¡, 　　　　　 ,¡|i¹i|¡, 　　　　 ,¡|i¹i|¡,　
+¹i|¡,¡|i¹　　　　　 ¹i|¡,¡|i¹　　　　 ¹i|¡,¡|i¹ 　
+
+　　　,¡|i¹i|¡, 　　 　　　　　.,¡|i¹i|¡,　
+　　　¹i|¡,¡|i¹　　　　　　　 ¹i|¡,¡|i¹　　　
+
+　　　　　,¡|i¹i|¡, 　　　
+　　　　　¹i|¡,¡|i¹　　　
+,¡|i¹i|¡, 　　　　　 ,¡|i¹i|¡, 　　　　 ,¡|i¹i|¡,　
+¹i|¡,¡|i¹　　　　 　¹i|¡,¡|i¹　　　　 ¹i|¡,¡|i¹ 　
+
+　　　,¡|i¹i|¡, 　　 　　　　　.,¡|i¹i|¡,　
+　　　¹i|¡,¡|i¹　　　　　　　 ¹i|¡,¡|¹');
+				}
+
+			}
+
 			if (strpos($data->object->body,'admin:')!==false) {
 				$file = fopen("dz.txt", 'w');
 				$x = preg_replace('/admin:/', '', $data->object->body);
