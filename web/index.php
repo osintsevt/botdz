@@ -32,7 +32,7 @@ $app->post('/', function() use($app) {
 		
 		case 'message_new':
 		$a = false;
-			if ((strpos($data->object->body,'Новый год пришел!')!==false)&&(!$a)) {
+			/*if ((strpos($data->object->body,'Новый год пришел!')!==false)&&(!$a)) {
 
 				$params = array(
 				'group_id' => 'dzpredmet', 
@@ -48,7 +48,7 @@ $app->post('/', function() use($app) {
 				$a = true;
 
 			}
-
+*/
 			if ((strpos($data->object->body,'admin:')!==false)&&(!$a)) {
 				$file = fopen("dz.txt", 'w');
 				$x = preg_replace('/admin:/', '', $data->object->body);
